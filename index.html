@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <title>Random Number</title>
+    </head>
+    <body>
+        <h1>Random Number</h1>
+        <p>Random number between 1 and 6 is: <span id="dice"></span></p>
+        <button onclick="rolldice()">Roll Dice</button>
+        <hr>
+        <p>Money : <span id="money"></span></p>
+        <div id="1" style="background-color:red; width:100px; height:100px; border:1px solid black; float:left; position: relative;">
+            <div id="r1" style="background-color:black; width:20px; height:20px; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%);"></div>
+        </div>
+        <div id="2" style="background-color:yellow; width:100px; height:100px; border:1px solid black; float:left; position: relative;">
+            <div id="r2" style="background-color:black; width:20px; height:20px; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); display:none;"></div>
+            <span style="text-color:white; position:absolute; bottom: 0px; left: 25%;">+ 100$</span>
+        </div>
+        <div id="3" style="background-color:blue; width:100px; height:100px; border:1px solid black; float:left; position: relative;">
+            <div id="r3" style="background-color:black; width:20px; height:20px; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); display:none;"></div>
+        </div>
+        <div id="4" style="background-color:green; width:100px; height:100px; border:1px solid black; float:left; position: relative;">
+            <div id="r4" style="background-color:black; width:20px; height:20px; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); display:none;"></div>
+        </div>
+        <div id="5" style="background-color:pink; width:100px; height:100px; border:1px solid black; float:left; position: relative;">
+            <div id="r5" style="background-color:black; width:20px; height:20px; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); display:none;"></div>
+        </div>
+        <div id="6" style="background-color:orange; width:100px; height:100px; border:1px solid black; float:left; position: relative;">
+            <div id="r6" style="background-color:black; width:20px; height:20px; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); display:none;"></div>
+        </div>
+        <div id="7" style="background-color:red; width:100px; height:100px; border:1px solid black; float:left; position: relative;">
+            <div id="r7" style="background-color:black; width:20px; height:20px; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); display:none;"></div>
+        </div>
+        <div id="8" style="background-color:yellow; width:100px; height:100px; border:1px solid black; float:left; position: relative;">
+            <div id="r8" style="background-color:black; width:20px; height:20px; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); display:none;"></div>
+        </div>
+        <div id="9" style="background-color:blue; width:100px; height:100px; border:1px solid black; float:left; position: relative;">
+            <div id="r9" style="background-color:black; width:20px; height:20px; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); display:none;"></div>
+        </div>
+        <div id="10" style="background-color:green; width:100px; height:100px; border:1px solid black; float:left; position: relative;">
+            <div id="r10" style="background-color:black; width:20px; height:20px; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); display:none;"></div>
+        </div>
+        <div id="11" style="background-color:pink; width:100px; height:100px; border:1px solid black; float:left; position: relative;">
+            <div id="r11" style="background-color:black; width:20px; height:20px; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); display:none;"></div>
+        </div>
+        <div id="12" style="background-color:orange; width:100px; height:100px; border:1px solid black; float:left; position: relative;">
+            <div id="r12" style="background-color:black; width:20px; height:20px; position:absolute; top:50%; left:50%; transform: translate(-50%,-50%); display:none;"></div>
+        </div>
+    </body>
+</html>
+
+<script>
+
+    var dice = 0;
+    var myDice = 1;
+    var money = 0;
+
+    document
+        .getElementById("money")
+        .innerHTML = money;
+
+    function rolldice() {
+        var diceAudio = document.createElement("audio");
+        diceAudio.src = "/sounds/dice.mp3";
+        diceAudio.play();
+
+        var oldDice = myDice;
+        var dice = Math.floor(Math.random() * 6) + 1;
+        myDice = myDice + dice;
+        console.log(dice);
+
+        document
+            .getElementById("dice")
+            .innerHTML = dice;
+
+        // Check if player is at the end of the board
+        if (myDice >= 12) {
+            myDice = 1;
+        }
+
+        // Display Pawn on the board
+        document
+            .getElementById("r" + myDice)
+            .style
+            .display = "initial";
+
+        // Hide old Pawn on the board
+        document
+            .getElementById("r" + oldDice)
+            .style
+            .display = "none";
+
+        // Check if player is on a money field
+        if (myDice == 2) {
+            money = money + 100;
+            document
+                .getElementById("money")
+                .innerHTML = money;
+            var moneyAudio = document.createElement("audio");
+            moneyAudio.src = "/sounds/money.mp3";
+            moneyAudio.play();
+        }
+
+        return dice;
+        return myDice;
+    }
+</script>
